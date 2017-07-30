@@ -1,6 +1,6 @@
 import React, { Component }from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+
 
 
 class SearchBooks extends Component {
@@ -8,6 +8,7 @@ class SearchBooks extends Component {
     return (
       <div className="search-books">
             <div className="search-books-bar">
+              <Link to='/' className="close-search">Close</Link>
               <div className="search-books-input-wrapper">
                 {/* 
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -23,7 +24,6 @@ class SearchBooks extends Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-                <Link to='/' className="close-search">Close</Link>
               </ol>
             </div>
           </div>
