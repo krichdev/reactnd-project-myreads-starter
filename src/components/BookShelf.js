@@ -29,13 +29,12 @@ class BookShelf extends Component {
                           <option value="currentlyReading">Currently Reading</option>
                           <option value="wantToRead">Want to Read</option>
                           <option value="read">Read</option>
+                          <option value="none">Remove</option>
                         </select>
                       </div>
                     </div>
                     <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.authors.map(author => (
-                      <p key={author} className="authors-name">{author}</p>
-                      ))}
+                    <div className="book-authors">{Array.isArray(book.authors) ? book.authors.join(', '): book.authors}
                     </div>
                   </div>
                 </li>
