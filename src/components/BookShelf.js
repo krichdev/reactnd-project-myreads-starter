@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 
 class BookShelf extends Component {
@@ -23,13 +24,18 @@ class BookShelf extends Component {
                                     backgroundImage: `url(${book.imageLinks.thumbnail})`
                                   }}>
                       </div>
+                      <div className="purchase-book">
+                        <a href={book.infoLink}>
+                         <i className="fa fa-usd" aria-hidden="true"></i>
+                        </a>
+                      </div>
                       <div className="book-shelf-changer">
                         <select value={book.shelf} onChange={(e) => this.props.onShelfChange(book, e.target.value)}>
                           <option value="none" disabled>Move to...</option>
                           <option value="currentlyReading">Currently Reading</option>
                           <option value="wantToRead">Want to Read</option>
                           <option value="read">Read</option>
-                          <option value="none">Remove</option>
+                          <option value="none">None</option>
                         </select>
                       </div>
                     </div>

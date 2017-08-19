@@ -20,17 +20,17 @@ class SearchBooks extends Component {
   }
 
   updateBookShelf = (book, shelf) => {
-    // updating this book with shelf passed in as target.value
-    book.shelf = shelf
-    // setting state with new shelf
-    this.setState((state) => ({
-      books: state.books.filter(book => book)
-    }))
-    // API call to update book with new shelf on backend so when
-    // app is reloaded the shelf stays the same
-    BooksAPI.update(book, shelf)
+    BooksAPI.update(book, shelf).then(
+      this.setState(prevState => ({
+        books: prevState.books.map(b => {
+          if(b.id === book.id) {
+            b.shelf = shelf
+          }
+          return b
+        })
+      }))
+    )
   }
-
 
   render(){
     const bookSearch = _.debounce(term => {
