@@ -1,7 +1,6 @@
 import React, { Component }from 'react'
 import _ from "lodash";
 import { Link } from 'react-router-dom'
-import * as BooksAPI from '../BooksAPI'
 import BookShelf from './BookShelf'
 
 
