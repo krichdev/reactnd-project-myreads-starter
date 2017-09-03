@@ -1,40 +1,14 @@
 import React, { Component }from 'react'
 import _ from "lodash";
 import { Link } from 'react-router-dom'
-import * as BooksAPI from '../BooksAPI'
 import BookShelf from './BookShelf'
 
 
 class SearchBooks extends Component {
-  state = { 
-    books: [] 
-  }
-
-  bookSearch(term) {
-    BooksAPI.search(term).then((books) => {
-                    this.setState({ books })
-                    console.log(books)
-                }).catch(this.setState({
-                    books: undefined
-                }))
-  }
-
-  updateBookShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(
-      this.setState(prevState => ({
-        books: prevState.books.map(b => {
-          if(b.id === book.id) {
-            b.shelf = shelf
-          }
-          return b
-        })
-      }))
-    )
-  }
 
   render(){
     const bookSearch = _.debounce(term => {
-      this.bookSearch(term);
+      this.props.searchBooks(term);
     }, 300);
 
     return (
@@ -46,10 +20,11 @@ class SearchBooks extends Component {
               </div>
             </div>
             <div className="search-books-results">
-              {this.state.books !== undefined && (
+              {this.props.books &&
+                this.props.books.length > 0 && (
                  <BookShelf shelf="Search Results"
-                            books={this.state.books} 
-                            onShelfChange={this.updateBookShelf}/>
+                            books={this.props.books} 
+                            onShelfChange={this.props.updateBookShelf}/>
                  )}  
             </div>
           </div>
@@ -57,4 +32,4 @@ class SearchBooks extends Component {
   }
 }
 
-export default SearchBooks   
+export default SearchBooks 
