@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom'
 
 
 class BookShelf extends Component {
-  static propTypes = {
-    onShelfChange: PropTypes.func
-  }
 
   render() {
     return(
@@ -15,7 +12,9 @@ class BookShelf extends Component {
           <h2 className="bookshelf-title">{this.props.shelf}</h2>
           <div className="bookshelf-books">
             <ol className="books-grid">
-              {this.props.books.map(book =>(
+              {this.props.books &&
+                this.props.books.length > 0 &&
+                  this.props.books.map(book =>(
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">

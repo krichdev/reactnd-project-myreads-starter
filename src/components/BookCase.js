@@ -4,28 +4,6 @@ import * as BooksAPI from '../BooksAPI'
 import BookShelf from './BookShelf'
 
 class BookCase extends Component {
-  state = {
-    books: []
-  }
-
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-    })
-  }
-
- updateBookShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(
-      this.setState(prevState => ({
-        books: prevState.books.map(b => {
-          if(b.id === book.id) {
-            b.shelf = shelf
-          }
-          return b
-        })
-      }))
-    )
-  }
 
   render(){
     return (
@@ -35,16 +13,16 @@ class BookCase extends Component {
         </div>
         <div className="list-books-content">
           <BookShelf shelf="Currently Reading" 
-                     books={this.state.books.filter(book => book.shelf === "currentlyReading")}
-                     onShelfChange={this.updateBookShelf}
+                     books={this.props.books.filter(book => book.shelf === "currentlyReading")}
+                     onShelfChange={this.props.updateBookShelf}
           />
           <BookShelf shelf="Want To Read" 
-                     books={this.state.books.filter(book => book.shelf === "wantToRead")}
-                     onShelfChange={this.updateBookShelf}
+                     books={this.props.books.filter(book => book.shelf === "wantToRead")}
+                     onShelfChange={this.props.updateBookShelf}
           />
           <BookShelf shelf="Read" 
-                     books={this.state.books.filter(book => book.shelf === 'read')}
-                     onShelfChange={this.updateBookShelf}
+                     books={this.props.books.filter(book => book.shelf === 'read')}
+                     onShelfChange={this.props.updateBookShelf}
           />
         </div>
         <div className="open-search">
@@ -56,5 +34,3 @@ class BookCase extends Component {
 }
 
 export default BookCase
-
-
